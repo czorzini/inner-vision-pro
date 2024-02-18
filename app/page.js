@@ -3,6 +3,7 @@ import FooterSection from '../components/FooterSection'
 import HeaderSection from '../components/HeaderSection'
 import HeroSection from '../components/HeroSection'
 import IntroducingSection from '../components/IntroducingSection'
+import MusicPlayerSection from '../components/MusicPlayerSection'
 import ReDiscoverSection from '../components/ReDiscoverSection'
 import TuneRealitySection from '../components/TuneRealitySection'
 import Image from 'next/image'
@@ -17,6 +18,7 @@ export default function Home() {
       <ReDiscoverSection />
       <IntroducingSection />
       <FooterSection />
+      <MusicPlayerSection />
     </main>
   )
 }

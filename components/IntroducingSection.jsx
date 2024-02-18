@@ -90,26 +90,6 @@ const IntroducingSection = () => {
                 </div>
 
             </div>
-            {/* <div className='max-w-7xl mx-auto w-full p-4 my-20'>
-                <div className="grid grid-cols-5 gap-4">
-                    {
-                        GenreList.map((item, index) => {
-                            return (
-                                <div className="h-[40rem] w-full flex items-center justify-center">
-                                    <PinContainer>
-                                        <Link href={item.url} key={index} className="rounded-md relative">
-                                            <Image src={`/image/${item.img}`} height={257} width={257} alt={`Genre`} />
-                                            <div className="absolute top-0 left-0 p-5 w-full text-3xl font-medium">{item.title}</div>
-                                        </Link>
-                                    </PinContainer>
-                                </div>
-                            );
-                        })
-                    }
-                </div>
-
-            </div> */}
-
         </>
     )
 }
