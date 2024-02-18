@@ -75,13 +75,13 @@ const IntroducingSection = () => {
                     {
                         GenreList.map((item, index) => {
                             return (
-                                <div className="w-full h-full flex items-center justify-center">
+                                <div className="flex items-center justify-center">
                                     <PinContainer
                                         title={item.title}
                                         href="https://twitter.com/mannupaaji"
                                     >
                                         <Image src={`/image/${item.img}`} height={257} width={257} alt={`Genre`} />
-                                        {/* <div className="absolute top-0 left-0 p-5 w-full text-3xl font-medium">{item.title}</div> */}
+                                        <div className="absolute top-0 left-0 p-5 w-full text-3xl font-medium">{item.title}</div>
                                     </PinContainer>
                                 </div>
                             );
