@@ -4,6 +4,7 @@ import { MdVolumeUp } from "react-icons/md";
 import Image from 'next/image'
 import React from 'react'
 import Link from "next/link";
+import { PinContainer } from "./ui/3d-pin";
 
 const IntroducingSection = () => {
 
@@ -47,7 +48,7 @@ const IntroducingSection = () => {
                     </p>
                 </div>
             </div>
-            <div className="max-w-[1400px] mx-auto border-t border-b border-white/20 mb-10">
+            <div className="max-w-[1400px] mx-auto border-t border-b border-white/20">
                 <div className='max-w-7xl mx-auto w-full'>
                     <div className="grid md:grid-cols-2 gap-6 divide-x-[1px] divide-white/20">
                         <div className="flex flex-col justify-between gap-2 px-10 py-16">
@@ -69,21 +70,45 @@ const IntroducingSection = () => {
                     </div>
                 </div>
             </div>
-            <div className='max-w-7xl mx-auto w-full p-4 mt-10'>
+            <div className='max-w-7xl mx-auto w-full p-4 my-20'>
                 <div className="grid grid-cols-5 gap-4">
                     {
                         GenreList.map((item, index) => {
                             return (
-                                <Link href={item.url} key={index} className="rounded-md relative">
-                                    <Image src={`/image/${item.img}`} height={257} width={257} alt={`Genre`} />
-                                    <div className="absolute top-0 left-0 p-5 w-full text-3xl font-medium">{item.title}</div>
-                                </Link>
+                                <div className="w-full h-full flex items-center justify-center">
+                                    <PinContainer
+                                        title={item.title}
+                                        href="https://twitter.com/mannupaaji"
+                                    >
+                                        <Image src={`/image/${item.img}`} height={257} width={257} alt={`Genre`} />
+                                        {/* <div className="absolute top-0 left-0 p-5 w-full text-3xl font-medium">{item.title}</div> */}
+                                    </PinContainer>
+                                </div>
                             );
                         })
                     }
                 </div>
 
             </div>
+            {/* <div className='max-w-7xl mx-auto w-full p-4 my-20'>
+                <div className="grid grid-cols-5 gap-4">
+                    {
+                        GenreList.map((item, index) => {
+                            return (
+                                <div className="h-[40rem] w-full flex items-center justify-center">
+                                    <PinContainer>
+                                        <Link href={item.url} key={index} className="rounded-md relative">
+                                            <Image src={`/image/${item.img}`} height={257} width={257} alt={`Genre`} />
+                                            <div className="absolute top-0 left-0 p-5 w-full text-3xl font-medium">{item.title}</div>
+                                        </Link>
+                                    </PinContainer>
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+
+            </div> */}
 
         </>
     )

@@ -1,4 +1,5 @@
 import DiscoverSection from '@/components/DiscoverSection'
+import FooterSection from '@/components/FooterSection'
 import HeaderSection from '@/components/HeaderSection'
 import HeroSection from '@/components/HeroSection'
 import IntroducingSection from '@/components/IntroducingSection'
@@ -15,6 +16,7 @@ export default function Home() {
       <DiscoverSection />
       <ReDiscoverSection />
       <IntroducingSection />
+      <FooterSection />
     </main>
   )
 }
