@@ -1,18 +1,23 @@
 'use client'
 
+import { BsRepeat } from "react-icons/bs";
+import { BiShuffle } from "react-icons/bi";
+import { ImVolumeMedium } from "react-icons/im";
+import { CgClose } from "react-icons/cg";
+
 import { BsFillPauseCircleFill } from "react-icons/bs";
 import { BsFillPlayCircleFill } from "react-icons/bs";
-
 import { BiSkipNext } from "react-icons/bi";
-import React, { useState, useRef } from 'react';
-import dynamic from "next/dynamic";
-const ReactPlayer = dynamic(() => import("react-player/lazy"), { ssr: false });
+import React, { useState, useRef, useEffect } from 'react';
+import ReactPlayer from "react-player";
+import Image from "next/image";
 
-const MusicPlayerSection = () => {
+const MusicPlayerSection = ({ isPlayerReady, setIsPlayerReady }) => {
     const [playing, setPlaying] = useState(false);
     const [currentTrack, setCurrentTrack] = useState(0);
     const [volume, setVolume] = useState(0.5);
     const [played, setPlayed] = useState(0.1);
+    const [duration, setDuration] = useState(0);
     const [seeking, setSeeking] = useState(false);
 
     const MusicList = [
@@ -47,6 +52,7 @@ const MusicPlayerSection = () => {
             cover: "https://earth.fm/static/5b6ffc04aebc5f627c8f7192f01aaeef/26222/283_Storm-with-powerful-thunder-scaled.webp"
         },
     ];
+
 
     const playerRef = useRef(null);
 
@@ -91,24 +97,93 @@ const MusicPlayerSection = () => {
         }
     };
 
-    return (
-        <div className="container mx-auto px-4 py-8">
-            <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-lg">
-                <img src={MusicList[currentTrack].cover} alt="Cover" className="w-full h-64 object-cover" />
-                <div className="px-6 py-4">
-                    <h2 className="text-xl font-semibold">{MusicList[currentTrack].title}</h2>
-                    <h3 className="text-gray-600">{MusicList[currentTrack].artist}</h3>
-                    <div className="flex items-center mt-4">
-                        <BiSkipNext onClick={handlePrevious} className="rotate-180 cursor-pointer text-4xl focus:outline-none text-gray-600 hover:text-gray-900" />
-                        {playing ? (
-                            <BsFillPauseCircleFill onClick={handlePause} className="cursor-pointer text-3xl focus:outline-none text-gray-600 hover:text-gray-900" />
-                        ) : (
-                            <BsFillPlayCircleFill onClick={handlePlay} className="cursor-pointer text-3xl focus:outline-none text-gray-600 hover:text-gray-900" />
-                        )}
-                        <BiSkipNext onClick={handleNext} className="cursor-pointer text-4xl focus:outline-none text-gray-600 hover:text-gray-900" />
+    const formatDuration = (seconds) => {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
+    };
 
+    return (
+        <>
+            {isPlayerReady && <div className="fixed !z-[999] bottom-0 w-full bg-beta text-white/90">
+                <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 p-2">
+                    <div className="flex items-center gap-6">
+                        <Image src={MusicList[currentTrack].cover} height={80} width={80} alt="Cover" className="h-16 w-16 object-cover rounded-md" />
+                        <div className="flex flex-col gap-0">
+                            <h2 className="text-sm lg:text-md font-semibold">{MusicList[currentTrack].title}</h2>
+                            <h3 className="text-xs lg:text-sm">{MusicList[currentTrack].artist}</h3>
+                        </div>
                     </div>
-                    <div className="flex items-center mt-4">
+                    <div className="hidden md:flex flex-col justify-center gap-2 py-1.5">
+                        <div className="flex justify-center items-center gap-4">
+                            <BiShuffle className="cursor-pointer text-2xl focus:outline-none" />
+                            <BiSkipNext onClick={handlePrevious} className="rotate-180 cursor-pointer text-4xl focus:outline-none" />
+                            {playing ? (
+                                <BsFillPauseCircleFill onClick={handlePause} className="cursor-pointer text-4xl focus:outline-none" />
+                            ) : (
+                                <BsFillPlayCircleFill onClick={handlePlay} className="cursor-pointer text-4xl focus:outline-none" />
+                            )}
+                            <BiSkipNext onClick={handleNext} className="cursor-pointer text-4xl focus:outline-none" />
+                            <BsRepeat className="cursor-pointer text-2xl focus:outline-none" />
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <p className="text-sm">{formatDuration(played * duration)}</p>
+                            <input
+                                type="range"
+                                min={0}
+                                max={1}
+                                step="any"
+                                value={played}
+                                onMouseDown={handleSeekMouseDown}
+                                onChange={handleSeekChange}
+                                onMouseUp={handleSeekMouseUp}
+                                className="w-full bg-transparent cursor-pointer appearance-none disabled:opacity-50 disabled:pointer-events-none focus:outline-none
+                                    [&::-webkit-slider-thumb]:w-2.5
+                                    [&::-webkit-slider-thumb]:h-2.5
+                                    [&::-webkit-slider-thumb]:-mt-[3px]
+                                    [&::-webkit-slider-thumb]:appearance-none
+                                    [&::-webkit-slider-thumb]:bg-white/40
+                                    [&::-webkit-slider-thumb]:shadow-[0_0_0_2px_white/40]
+                                    [&::-webkit-slider-thumb]:rounded-full
+                                    [&::-webkit-slider-thumb]:transition-all
+                                    [&::-webkit-slider-thumb]:duration-150
+                                    [&::-webkit-slider-thumb]:ease-in-out
+                                    [&::-webkit-slider-thumb]:dark:bg-white/40
+                                    
+                                    [&::-moz-range-thumb]:w-2.5
+                                    [&::-moz-range-thumb]:h-2.5
+                                    [&::-moz-range-thumb]:appearance-none
+                                    [&::-moz-range-thumb]:bg-white
+                                    [&::-moz-range-thumb]:border-0
+                                    [&::-moz-range-thumb]:border-blue-600
+                                    [&::-moz-range-thumb]:rounded-full
+                                    [&::-moz-range-thumb]:transition-all
+                                    [&::-moz-range-thumb]:duration-150
+                                    [&::-moz-range-thumb]:ease-in-out/40
+                                    
+                                    [&::-webkit-slider-runnable-track]:w-full
+                                    [&::-webkit-slider-runnable-track]:h-1
+                                    [&::-webkit-slider-runnable-track]:bg-gray-100
+                                    [&::-webkit-slider-runnable-track]:rounded-full
+                                    [&::-webkit-slider-runnable-track]:dark:bg-white/40                                
+                                    [&::-moz-range-track]:w-full
+                                    [&::-moz-range-track]:h-1
+                                    [&::-moz-range-track]:bg-gray-100
+                                    [&::-moz-range-track]:rounded-full"
+                            />
+                            <p className="text-sm">{formatDuration(duration)}</p>
+                        </div>
+                    </div>
+                    <div className="flex md:hidden justify-end items-center">
+                            {playing ? (
+                                <BsFillPauseCircleFill onClick={handlePause} className="cursor-pointer text-4xl focus:outline-none" />
+                            ) : (
+                                <BsFillPlayCircleFill onClick={handlePlay} className="cursor-pointer text-4xl focus:outline-none" />
+                            )}
+                        </div>
+
+                    <div className="hidden md:flex items-center justify-end gap-2">
+                        <ImVolumeMedium className="text-2xl focus:outline-none" />
                         <input
                             type="range"
                             min={0}
@@ -116,37 +191,58 @@ const MusicPlayerSection = () => {
                             step="any"
                             value={volume}
                             onChange={handleVolumeChange}
-                            className="w-full h-5 bg-gray-200 rounded-lg overflow-hidden appearance-none focus:outline-none"
+                            className="max-w-24 w-full bg-transparent cursor-pointer appearance-none disabled:opacity-50 disabled:pointer-events-none focus:outline-none
+                                [&::-webkit-slider-thumb]:w-2.5
+                                [&::-webkit-slider-thumb]:h-2.5
+                                [&::-webkit-slider-thumb]:-mt-[3px]
+                                [&::-webkit-slider-thumb]:appearance-none
+                                [&::-webkit-slider-thumb]:bg-white/40
+                                [&::-webkit-slider-thumb]:shadow-[0_0_0_2px_white/40]
+                                [&::-webkit-slider-thumb]:rounded-full
+                                [&::-webkit-slider-thumb]:transition-all
+                                [&::-webkit-slider-thumb]:duration-150
+                                [&::-webkit-slider-thumb]:ease-in-out
+                                [&::-webkit-slider-thumb]:dark:bg-white/40
+                                
+                                [&::-moz-range-thumb]:w-2.5
+                                [&::-moz-range-thumb]:h-2.5
+                                [&::-moz-range-thumb]:appearance-none
+                                [&::-moz-range-thumb]:bg-white
+                                [&::-moz-range-thumb]:border-0
+                                [&::-moz-range-thumb]:border-blue-600
+                                [&::-moz-range-thumb]:rounded-full
+                                [&::-moz-range-thumb]:transition-all
+                                [&::-moz-range-thumb]:duration-150
+                                [&::-moz-range-thumb]:ease-in-out/40
+                                
+                                [&::-webkit-slider-runnable-track]:w-full
+                                [&::-webkit-slider-runnable-track]:h-1
+                                [&::-webkit-slider-runnable-track]:bg-gray-100
+                                [&::-webkit-slider-runnable-track]:rounded-full
+                                [&::-webkit-slider-runnable-track]:dark:bg-white/40                                
+                                [&::-moz-range-track]:w-full
+                                [&::-moz-range-track]:h-1
+                                [&::-moz-range-track]:bg-gray-100
+                                [&::-moz-range-track]:rounded-full"
                         />
+                        <CgClose onClick={() => setIsPlayerReady(false)} className="cursor-pointer ms-5 text-3xl focus:outline-none hover:opacity-70 transition-all duration-300" />
                     </div>
-                    <div className="flex items-center mt-4">
-                        <input
-                            type="range"
-                            min={0}
-                            max={1}
-                            step="any"
-                            value={played}
-                            onMouseDown={handleSeekMouseDown}
-                            onChange={handleSeekChange}
-                            onMouseUp={handleSeekMouseUp}
-                            className="w-full h-5 bg-gray-200 rounded-lg overflow-hidden appearance-none focus:outline-none"
-                        />
-                    </div>
+
                 </div>
-            </div>
-            <ReactPlayer
-                ref={playerRef}
-                url={MusicList[currentTrack].musicUrl}
-                playing={playing}
-                volume={volume}
-                controls={false}
-                width="0px"
-                height="0px"
-                onProgress={handleProgress}
-            />
-        </div>
+                {isPlayerReady && <ReactPlayer
+                    ref={playerRef}
+                    url={MusicList[currentTrack].musicUrl}
+                    playing={playing}
+                    volume={volume}
+                    controls={false}
+                    onDuration={(e) => setDuration(e)}
+                    width="0px"
+                    height="0px"
+                    onProgress={handleProgress}
+                />}
+            </div>}
+        </>
     );
 };
 
 export default MusicPlayerSection;
-

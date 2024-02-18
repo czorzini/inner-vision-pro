@@ -1,19 +1,27 @@
+'use client'
+
 import { BsFillPlayCircleFill } from "react-icons/bs";
-import { HiPlay } from "react-icons/hi";
 import { HiVolumeUp } from "react-icons/hi";
-import { ImVolumeMedium } from "react-icons/im";
-import { MdVolumeUp } from "react-icons/md";
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
+import MusicPlayerSection from "./MusicPlayerSection";
 
 const DiscoverSection = () => {
+    const [isPlayerReady, setIsPlayerReady] = useState(false);
+
+    useEffect(() => {
+        setIsPlayerReady(true);
+    }, [])
+
+
     return (
         <>
+            <MusicPlayerSection {...{ isPlayerReady, setIsPlayerReady }} />
             <div className='max-w-7xl mx-auto w-full p-4 mt-10'>
                 <div className="max-w-5xl mx-auto text-5xl my-24 flex flex-col gap-6">
                     <div className="text-3xl">Immersive sounds</div>
-                    <div className="max-w-3xl font-bold text-[110px] leading-[100px]">Discover the power of natural beats.</div>
+                    <div className="max-w-3xl font-bold text-6xl md:text-7xl lg:text-[100px] lg:leading-[100px]">Discover the power of natural beats.</div>
                     <p className='text-3xl'>
                         When we simply let our ears receive the music of the living nature, these miraculous, exquisite sounds can help us calm down and come back to our senses, instead of running away from them. <br />We can do it in our garden, at the beach, in the forest, or — as an immersive visualisation — we can listen to recordings and let visuals naturally appear in our mind’s eye.
                     </p>
@@ -23,9 +31,9 @@ const DiscoverSection = () => {
                 <div className='max-w-7xl mx-auto w-full'>
                     <div className="grid md:grid-cols-2 gap-6 divide-x-[1px] divide-white/20">
                         <CardContainer className="flex justify-center items-center px-10 py-20">
-                            <CardBody className="relative">
+                            <CardBody className="relative cursor-pointer">
                                 <Image className='opacity-60 object contain' src={`/image/music-bg.webp`} height={308} width={568} alt="Music Light Rain" />
-                                <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between p-8">
+                                <div onClick={() => setIsPlayerReady(true)} className="absolute top-0 left-0 w-full h-full flex flex-col justify-between p-8">
                                     <CardItem translateZ={10} className="flex flex-col gap-2">
                                         <div className="text-3xl font-bold">Light Rain on Hollow Wood</div>
                                         <div className="text-2xl underline">Grégoire Chauvot</div>
