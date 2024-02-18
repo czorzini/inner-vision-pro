@@ -2,9 +2,9 @@ import DiscoverSection from '../components/DiscoverSection'
 import HeaderSection from '../components/HeaderSection'
 import HeroSection from '../components/HeroSection'
 import IntroducingSection from '../components/IntroducingSection'
-import MusicPlayerSection from '../components/MusicPlayerSection'
 import ReDiscoverSection from '../components/ReDiscoverSection'
 import TuneRealitySection from '../components/TuneRealitySection'
+import FooterSection from '../components/FooterSection'
 
 export default function Home() {
   return (
@@ -15,7 +15,7 @@ export default function Home() {
       <DiscoverSection />
       <ReDiscoverSection />
       <IntroducingSection />
-      <MusicPlayerSection />
+      <FooterSection/>
     </main>
   )
 }
