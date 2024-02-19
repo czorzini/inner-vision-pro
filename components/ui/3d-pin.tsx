@@ -48,9 +48,9 @@ export const PinContainer = ({
           style={{
             transform: transform,
           }}
-          className="absolute left-1/2 top-1/2 w-full h-full flex justify-start items-start rounded-2xl shadow-[0_8px_16px_rgb(0_0_0/0.4)] bg-beta border border-white/[0.1] group-hover/pin:border-white/[0.2] transition duration-700 overflow-hidden"
+          className="absolute left-1/2 top-1/2 w-full h-full flex justify-start items-start rounded-2xl shadow-[0_8px_16px_rgb(0_0_0/0.4)] group-hover/pin:border-white/[0.2] transition duration-700 overflow-hidden"
         >
-          <div className={cn(" relative z-50", className)}>{children}</div>
+          <div className={cn(" relative z-50 w-full h-full", className)}>{children}</div>
         </div>
       </div>
       <PinPerspective title={title} href={href} />
@@ -66,11 +66,12 @@ export const PinPerspective = ({
   href?: string;
 }) => {
   return (
-    <motion.div className="select-none w-full h-56 flex items-center justify-center opacity-0 group-hover/pin:opacity-100 z-[60] transition duration-500">
+    <motion.div className="select-none w-full h-56 flex items-center justify-center opacity-0 group-hover/pin:opacity-100 z-[50] transition duration-500">
       <div className=" w-full h-full flex-none inset-0">
         <div className="absolute top-0 inset-x-0 flex justify-center">
           <Link
             href={href}
+            target="_blank"
             className="relative flex space-x-2 items-center z-10 rounded-full bg-zinc-950 py-0.5 px-4 ring-1 ring-white/10 "
           >
             <>
