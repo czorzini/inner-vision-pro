@@ -1,5 +1,8 @@
 'use client'
 
+import { TbPlayerPlayFilled } from "react-icons/tb";
+import { TbPlayerPauseFilled } from "react-icons/tb";
+import { TbPlayerTrackNextFilled } from "react-icons/tb";
 import { BsRepeat } from "react-icons/bs";
 import { BiShuffle } from "react-icons/bi";
 import { ImVolumeMedium } from "react-icons/im";
@@ -103,31 +106,30 @@ const MusicPlayerSection = ({ isPlayerReady, setIsPlayerReady }) => {
         return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
     };
 
+
     return (
         <>
-            {isPlayerReady && <div className="fixed !z-[999] bottom-0 w-full bg-beta text-white/90">
-                <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-3 p-2">
-                    <div className="flex items-center gap-6">
-                        <Image src={MusicList[currentTrack].cover} height={80} width={80} alt="Cover" className="h-16 w-16 object-cover rounded-md" />
-                        <div className="flex flex-col gap-0">
-                            <h2 className="text-sm lg:text-md font-semibold">{MusicList[currentTrack].title}</h2>
-                            <h3 className="text-xs lg:text-sm">{MusicList[currentTrack].artist}</h3>
-                        </div>
+            {isPlayerReady && <div className="fixed !z-[999] bottom-0 w-full text-white/70 px-3 md:px-0">
+                <div className="max-w-2xl rounded-full mx-auto my-2 grid grid-cols-4 md:grid-cols-4 gap-3 py-1 sm:py-2 px-4 sm:px-6 bg-beta/70 backdrop-blur-md">
+                    <div className="order-1 sm:order-2 flex justify-center items-center gap-4">
+                        <TbPlayerTrackNextFilled onClick={handlePrevious} className="rotate-180 cursor-pointer text-xl focus:outline-none" />
+                        {playing ? (
+                            <TbPlayerPauseFilled onClick={handlePause} className="cursor-pointer text-xl focus:outline-none" />
+                        ) : (
+                            <TbPlayerPlayFilled onClick={handlePlay} className="cursor-pointer text-xl focus:outline-none" />
+                        )}
+                        <TbPlayerTrackNextFilled onClick={handleNext} className="cursor-pointer text-xl focus:outline-none" />
                     </div>
-                    <div className="hidden md:flex flex-col justify-center gap-2 py-1.5">
-                        <div className="flex justify-center items-center gap-4">
-                            <BiShuffle className="cursor-pointer text-2xl focus:outline-none" />
-                            <BiSkipNext onClick={handlePrevious} className="rotate-180 cursor-pointer text-4xl focus:outline-none" />
-                            {playing ? (
-                                <BsFillPauseCircleFill onClick={handlePause} className="cursor-pointer text-4xl focus:outline-none" />
-                            ) : (
-                                <BsFillPlayCircleFill onClick={handlePlay} className="cursor-pointer text-4xl focus:outline-none" />
-                            )}
-                            <BiSkipNext onClick={handleNext} className="cursor-pointer text-4xl focus:outline-none" />
-                            <BsRepeat className="cursor-pointer text-2xl focus:outline-none" />
+                    <div className="order-1 sm:order-1 col-span-3 sm:col-span-2 flex flex-col px-2 overflow-hidden rounded-2xl">
+                        <div className="flex items-center gap-2 bg-black/10 shadow-inner rounded-lg">
+                            <Image src={MusicList[currentTrack].cover} height={60} width={60} alt="Cover" className="h-10 w-10 object-cover rounded-md" />
+                            <div className="flex flex-col gap-0">
+                                <h2 className="text-xs lg:text-sm font-semibold line-clamp-1">{MusicList[currentTrack].title}</h2>
+                                <h3 className="text-[10px] lg:text-xs !font-normal font-sans opacity-80">{MusicList[currentTrack].artist}</h3>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                            <p className="text-sm">{formatDuration(played * duration)}</p>
+                        <div className={`h-[3px] w-full bg-black/30 relative`}>
+                            <div style={{ width: `${(played * 100)}%` }} className="absolute z-40 top-0 left-0 content-normal h-full bg-white/70 transition-all duration-300"></div>
                             <input
                                 type="range"
                                 min={0}
@@ -137,25 +139,25 @@ const MusicPlayerSection = ({ isPlayerReady, setIsPlayerReady }) => {
                                 onMouseDown={handleSeekMouseDown}
                                 onChange={handleSeekChange}
                                 onMouseUp={handleSeekMouseUp}
-                                className="w-full bg-transparent cursor-pointer appearance-none disabled:opacity-50 disabled:pointer-events-none focus:outline-none
+                                className="w-full opacity-0 z-[999] hover:opacity-100 absolute top-0 left-0 bg-transparent cursor-pointer appearance-none disabled:opacity-50 disabled:pointer-events-none focus:outline-none
                                     [&::-webkit-slider-thumb]:w-2.5
                                     [&::-webkit-slider-thumb]:h-2.5
                                     [&::-webkit-slider-thumb]:-mt-[3px]
                                     [&::-webkit-slider-thumb]:appearance-none
-                                    [&::-webkit-slider-thumb]:bg-white/40
-                                    [&::-webkit-slider-thumb]:shadow-[0_0_0_2px_white/40]
+                                    [&::-webkit-slider-thumb]:bg-transparent
+                                    [&::-webkit-slider-thumb]:shadow-[0_0_0_2px_transparent]
                                     [&::-webkit-slider-thumb]:rounded-full
                                     [&::-webkit-slider-thumb]:transition-all
                                     [&::-webkit-slider-thumb]:duration-150
                                     [&::-webkit-slider-thumb]:ease-in-out
-                                    [&::-webkit-slider-thumb]:dark:bg-white/40
+                                    [&::-webkit-slider-thumb]:dark:bg-transparent
                                     
                                     [&::-moz-range-thumb]:w-2.5
                                     [&::-moz-range-thumb]:h-2.5
                                     [&::-moz-range-thumb]:appearance-none
                                     [&::-moz-range-thumb]:bg-white
                                     [&::-moz-range-thumb]:border-0
-                                    [&::-moz-range-thumb]:border-blue-600
+                                    [&::-moz-range-thumb]:border-transparent
                                     [&::-moz-range-thumb]:rounded-full
                                     [&::-moz-range-thumb]:transition-all
                                     [&::-moz-range-thumb]:duration-150
@@ -163,26 +165,19 @@ const MusicPlayerSection = ({ isPlayerReady, setIsPlayerReady }) => {
                                     
                                     [&::-webkit-slider-runnable-track]:w-full
                                     [&::-webkit-slider-runnable-track]:h-1
-                                    [&::-webkit-slider-runnable-track]:bg-gray-100
+                                    [&::-webkit-slider-runnable-track]:bg-transparent
                                     [&::-webkit-slider-runnable-track]:rounded-full
-                                    [&::-webkit-slider-runnable-track]:dark:bg-white/40                                
+                                    [&::-webkit-slider-runnable-track]:dark:bg-transparent                                
                                     [&::-moz-range-track]:w-full
                                     [&::-moz-range-track]:h-1
-                                    [&::-moz-range-track]:bg-gray-100
+                                    [&::-moz-range-track]:bg-transparent
                                     [&::-moz-range-track]:rounded-full"
                             />
-                            <p className="text-sm">{formatDuration(duration)}</p>
-                        </div>
-                    </div>
-                    <div className="flex md:hidden justify-end items-center">
-                            {playing ? (
-                                <BsFillPauseCircleFill onClick={handlePause} className="cursor-pointer text-4xl focus:outline-none" />
-                            ) : (
-                                <BsFillPlayCircleFill onClick={handlePlay} className="cursor-pointer text-4xl focus:outline-none" />
-                            )}
                         </div>
 
-                    <div className="hidden md:flex items-center justify-end gap-2">
+                    </div>
+
+                    <div className="hidden sm:flex items-center justify-center gap-4">
                         <ImVolumeMedium className="text-2xl focus:outline-none" />
                         <input
                             type="range"
@@ -225,7 +220,7 @@ const MusicPlayerSection = ({ isPlayerReady, setIsPlayerReady }) => {
                                 [&::-moz-range-track]:bg-gray-100
                                 [&::-moz-range-track]:rounded-full"
                         />
-                        <CgClose onClick={() => setIsPlayerReady(false)} className="cursor-pointer ms-5 text-3xl focus:outline-none hover:opacity-70 transition-all duration-300" />
+                        <CgClose onClick={() => setIsPlayerReady(false)} className="cursor-pointer text-3xl focus:outline-none hover:opacity-70 transition-all duration-300" />
                     </div>
 
                 </div>
