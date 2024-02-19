@@ -111,7 +111,7 @@ const MusicPlayerSection = ({ isPlayerReady, setIsPlayerReady }) => {
         <>
             {isPlayerReady && <div className="fixed !z-[999] bottom-0 w-full text-white/70 px-3 md:px-0">
                 <div className="max-w-2xl rounded-full mx-auto my-2 grid grid-cols-4 md:grid-cols-4 gap-3 py-1 sm:py-2 px-4 sm:px-6 bg-beta/70 backdrop-blur-md">
-                    <div className="order-1 sm:order-2 flex justify-center items-center gap-4">
+                    <div className="order-2 sm:order-1 flex justify-center items-center gap-4">
                         <TbPlayerTrackNextFilled onClick={handlePrevious} className="rotate-180 cursor-pointer text-xl focus:outline-none" />
                         {playing ? (
                             <TbPlayerPauseFilled onClick={handlePause} className="cursor-pointer text-xl focus:outline-none" />
@@ -120,7 +120,7 @@ const MusicPlayerSection = ({ isPlayerReady, setIsPlayerReady }) => {
                         )}
                         <TbPlayerTrackNextFilled onClick={handleNext} className="cursor-pointer text-xl focus:outline-none" />
                     </div>
-                    <div className="order-1 sm:order-1 col-span-3 sm:col-span-2 flex flex-col px-2 overflow-hidden rounded-2xl">
+                    <div className="order-1 sm:order-2 col-span-3 sm:col-span-2 flex flex-col px-2 overflow-hidden rounded-2xl">
                         <div className="flex items-center gap-2 bg-black/10 shadow-inner rounded-lg">
                             <Image src={MusicList[currentTrack].cover} height={60} width={60} alt="Cover" className="h-10 w-10 object-cover rounded-md" />
                             <div className="flex flex-col gap-0">
@@ -177,7 +177,7 @@ const MusicPlayerSection = ({ isPlayerReady, setIsPlayerReady }) => {
 
                     </div>
 
-                    <div className="hidden sm:flex items-center justify-center gap-4">
+                    <div className="order-3 hidden sm:flex items-center justify-center gap-4">
                         <ImVolumeMedium className="text-2xl focus:outline-none" />
                         <input
                             type="range"
