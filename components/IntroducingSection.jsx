@@ -52,13 +52,13 @@ const IntroducingSection = () => {
                             <div className="flex flex-col w-full items-center gap-1">
                                 <div className="md:text-lg text-center">More than</div>
                                 <div className="w-full font-bold text-4xl sm:text-6xl md:text-7xl xl:text-[100px] xl:leading-[100px] flex justify-center items-end gap-2"><span className="text-alpha">800 </span> <span className="text-3xl sm:text-5xl xl:text-7xl"> recordings</span></div>
-                                <div className="md:text-lg text-center">from hundreds of field recordists<br /> around the world</div>
+                                <div className="md:text-lg text-center">from hundreds of field recordists<br /> around the world.</div>
                             </div>
                             <div className="flex flex-col w-full items-center gap-1">
                                 <div className="md:text-lg text-center">And</div>
                                 <div className="w-full font-bold text-4xl sm:text-6xl md:text-7xl xl:text-[100px] xl:leading-[100px] flex justify-center items-end gap-2"><span className="text-alpha">0 </span> <span className="text-3xl sm:text-5xl xl:text-7xl"> profit</span></div>
                                 <div className="md:text-lg text-center">we are a registered charity,<br />
-                                    access to nature is a human right</div>
+                                    access to nature is a human right.</div>
                             </div>
                         </div>
                         <div className="flex justify-center items-center px-4 md:px-10 py-5 md:py-16">

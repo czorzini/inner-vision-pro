@@ -3,7 +3,7 @@ import Providers from '../components/Providers'
 
 
 export const metadata = {
-  title: 'Inner Vision',
+  title: 'Inner Vision Pro',
   description: 'Tune in to reality',
 }
 
