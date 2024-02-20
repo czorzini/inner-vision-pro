@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { PinContainer } from "./ui/3d-pin";
+import Link from 'next/link';
 
 const IntroducingSection = () => {
 
@@ -26,7 +27,7 @@ const IntroducingSection = () => {
             url: 'https://earth.fm/playlists/best-nature-sounds-for-sleep'
         },
         {
-            title: 'Mountains',
+            title: 'Rain Sounds',
             img: 'genre-6.webp',
             url: 'https://earth.fm/playlists/rain'
         },
@@ -71,15 +72,17 @@ const IntroducingSection = () => {
                     {
                         GenreList.map((item, index) => {
                             return (
-                                <div key={index} className="flex items-center justify-center">
-                                    <PinContainer
-                                        title={item.title}
-                                        href={item.url}
-                                    >
-                                        <Image className='w-full h-full object-cover' src={`/image/${item.img}`} height={257} width={257} alt={`Genre`} />
-                                        <div className="absolute top-0 left-0 p-5 w-full text-lg md:text-2xl lg:text-3xl font-medium">{item.title}</div>
-                                    </PinContainer>
-                                </div>
+                                <Link key={index} href={item.url} target='_blank'>
+                                    <div className="flex items-center justify-center">
+                                        <PinContainer
+                                            title={item.title}
+                                            href={item.url}
+                                        >
+                                            <Image className='w-full h-full object-cover' src={`/image/${item.img}`} height={257} width={257} alt={`Genre`} />
+                                            <div className="absolute top-0 left-0 p-5 w-full text-lg md:text-2xl lg:text-3xl font-medium">{item.title}</div>
+                                        </PinContainer>
+                                    </div>
+                                </Link>
                             );
                         })
                     }

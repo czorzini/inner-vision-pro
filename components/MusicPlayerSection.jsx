@@ -11,11 +11,14 @@ import { CgClose } from "react-icons/cg";
 import { BsFillPauseCircleFill } from "react-icons/bs";
 import { BsFillPlayCircleFill } from "react-icons/bs";
 import { BiSkipNext } from "react-icons/bi";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import ReactPlayer from "react-player";
 import Image from "next/image";
+import { AppContext } from "./Providers";
 
-const MusicPlayerSection = ({ isPlayerReady, setIsPlayerReady }) => {
+const MusicPlayerSection = () => {
+    const { isPlayerReady, setIsPlayerReady } = useContext(AppContext);
+
     const [playing, setPlaying] = useState(false);
     const [currentTrack, setCurrentTrack] = useState(0);
     const [volume, setVolume] = useState(0.5);
