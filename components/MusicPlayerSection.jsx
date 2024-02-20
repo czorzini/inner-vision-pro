@@ -1,16 +1,13 @@
 'use client'
+import { TbRepeat } from "react-icons/tb";
+import { TbRepeatOff } from "react-icons/tb";
 
 import { TbPlayerPlayFilled } from "react-icons/tb";
 import { TbPlayerPauseFilled } from "react-icons/tb";
 import { TbPlayerTrackNextFilled } from "react-icons/tb";
-import { BsRepeat } from "react-icons/bs";
-import { BiShuffle } from "react-icons/bi";
 import { ImVolumeMedium } from "react-icons/im";
 import { CgClose } from "react-icons/cg";
 
-import { BsFillPauseCircleFill } from "react-icons/bs";
-import { BsFillPlayCircleFill } from "react-icons/bs";
-import { BiSkipNext } from "react-icons/bi";
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import ReactPlayer from "react-player";
 import Image from "next/image";
@@ -25,6 +22,7 @@ const MusicPlayerSection = () => {
     const [played, setPlayed] = useState(0.1);
     const [duration, setDuration] = useState(0);
     const [seeking, setSeeking] = useState(false);
+    const [doLoop, setDoLoop] = useState(false);
 
     const MusicList = [
         {
@@ -181,7 +179,11 @@ const MusicPlayerSection = () => {
                     </div>
 
                     <div className="order-3 hidden sm:flex items-center justify-center gap-4">
-                        <ImVolumeMedium className="text-2xl focus:outline-none" />
+                        {doLoop ?
+                            <TbRepeat onClick={() => { setDoLoop(false) }} className="text-4xl cursor-pointer focus:outline-none" /> :
+                            <TbRepeatOff onClick={() => { setDoLoop(true) }} className="text-4xl cursor-pointer focus:outline-none" />
+                        }
+                        <ImVolumeMedium className="text-4xl focus:outline-none" />
                         <input
                             type="range"
                             min={0}
@@ -233,6 +235,7 @@ const MusicPlayerSection = () => {
                     playing={playing}
                     volume={volume}
                     controls={false}
+                    loop={doLoop}
                     onDuration={(e) => setDuration(e)}
                     width="0px"
                     height="0px"
