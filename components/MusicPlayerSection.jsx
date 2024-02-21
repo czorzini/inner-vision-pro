@@ -14,9 +14,8 @@ import Image from "next/image";
 import { AppContext } from "./Providers";
 
 const MusicPlayerSection = () => {
-    const { isPlayerReady, setIsPlayerReady } = useContext(AppContext);
+    const { isPlayerReady, setIsPlayerReady, playing, setPlaying } = useContext(AppContext);
 
-    const [playing, setPlaying] = useState(false);
     const [currentTrack, setCurrentTrack] = useState(0);
     const [volume, setVolume] = useState(0.5);
     const [played, setPlayed] = useState(0.1);
@@ -25,6 +24,12 @@ const MusicPlayerSection = () => {
     const [doLoop, setDoLoop] = useState(false);
 
     const MusicList = [
+        {
+            title: "Whisper of a Mountain Stream",
+            artist: "Vladimir Bocharov",
+            musicUrl: "https://gcs.earth.fm/wp-content/uploads/2024/01/earth-fm_Vladimir-Bocharov_2016.07-08_Mountain-stream-Saylyugemsky-National-Park-Altai-Republic-Russia_20-min-RX.mp3",
+            cover: "https://earth.fm/static/1489dd1a94d84c311013e2e22dd26959/26222/285_Tasmanian-Rainforest-Stream-scaled.webp"
+        },
         {
             title: "A Night With the Crickets",
             artist: "Rüdiger Ortiz-Álvarez",
@@ -36,12 +41,6 @@ const MusicPlayerSection = () => {
             artist: "Giselle Ragoonanan",
             musicUrl: "https://gcs.earth.fm/wp-content/uploads/2024/01/Tropicbirds_and_Frigatebirds_Little_Tobago_Giselle_Ragoonanan_EarthfmGrants_192.mp3",
             cover: "https://earth.fm/static/e06a2d5b84a909078323e323a81433e3/26222/383_Hauturu-Afternoon-scaled.webp"
-        },
-        {
-            title: "Whisper of a Mountain Stream",
-            artist: "Vladimir Bocharov",
-            musicUrl: "https://gcs.earth.fm/wp-content/uploads/2024/01/earth-fm_Vladimir-Bocharov_2016.07-08_Mountain-stream-Saylyugemsky-National-Park-Altai-Republic-Russia_20-min-RX.mp3",
-            cover: "https://earth.fm/static/1489dd1a94d84c311013e2e22dd26959/26222/285_Tasmanian-Rainforest-Stream-scaled.webp"
         },
         {
             title: "Akkol River’s Tale",

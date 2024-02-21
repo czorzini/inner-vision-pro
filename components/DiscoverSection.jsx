@@ -9,7 +9,7 @@ import Link from "next/link";
 import { AppContext } from "./Providers";
 
 const DiscoverSection = () => {
-    const { isPlayerReady, setIsPlayerReady } = useContext(AppContext);
+    const { isPlayerReady, setIsPlayerReady, playing, setPlaying } = useContext(AppContext);
 
     return (
         <>
@@ -28,7 +28,7 @@ const DiscoverSection = () => {
                         <CardContainer className="flex justify-center items-center px-5 lg:px-10 pt-8 pb-5 lg:py-20">
                             <CardBody className="relative cursor-pointer">
                                 <Image className='opacity-60 object contain' src={`/image/music-bg.webp`} height={308} width={568} alt="Music Light Rain" />
-                                <div onClick={() => setIsPlayerReady(true)} className="absolute top-0 left-0 w-full h-full flex flex-col justify-between p-4 sm:p-6 md:p-8 lg:p-8">
+                                <div onClick={() => { setIsPlayerReady(true); setPlaying(true) }} className="absolute top-0 left-0 w-full h-full flex flex-col justify-between p-4 sm:p-6 md:p-8 lg:p-8">
                                     <CardItem translateZ={10} className="flex flex-col gap-2">
                                         <div className="text-lg sm:text-2xl md:text-3xl lg:text-2xl xl:text-3xl font-bold">Light Rain on Hollow Wood</div>
                                         <div className="text-base sm:text-xl md:text-2xl lg:text-xl xl:text-2xl underline opacity-80">Grégoire Chauvot</div>
