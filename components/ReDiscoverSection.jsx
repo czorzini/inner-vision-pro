@@ -17,7 +17,12 @@ const ReDiscoverSection = () => {
                     </p>
                 </div>
             </div>
-            <Image className='max-w-[1400px] mx-auto w-full h-auto object-contain' src={`/image/nature.webp`} height={905} width={1440} alt='Nature' />
+            {/* <Image className='max-w-[1400px] mx-auto w-full h-auto object-contain' src={`/image/nature.webp`} height={905} width={1440} alt='Nature' /> */}
+            <video className='max-w-[1400px] mx-auto w-full h-auto object-contain' autoPlay loop muted playsInline>
+                <source src="/video/nature.webm" type="video/webm" />
+                Your browser does not support the video tag.
+            </video>
+
         </>
     )
 }

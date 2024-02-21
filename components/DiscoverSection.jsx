@@ -34,7 +34,7 @@ const DiscoverSection = () => {
                                         <div className="text-base sm:text-xl md:text-2xl lg:text-xl xl:text-2xl underline opacity-80">Grégoire Chauvot</div>
                                     </CardItem>
                                     <div className="flex justify-between items-center">
-                                        <CardItem translateZ={20} className="flex items-center gap-2">
+                                        <CardItem translateZ={30} className="flex items-center gap-2">
                                             <HiVolumeUp className="text-2xl sm:text-3xl" />
                                             <div className="h-1 w-32 bg-white/50 rounded-3xl overflow-hidden relative before:absolute before:top-0 before:left-0 before:content-normal before:h-1 before:w-1/3 before:bg-white before:rounded-3xl"></div>
                                         </CardItem>
