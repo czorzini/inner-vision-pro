@@ -7,7 +7,7 @@ const IntroducingSection = () => {
 
     const GenreList = [
         {
-            title: 'Seaside',
+            title: 'Ocean Sounds',
             img: 'genre-1.webp',
             url: 'https://earth.fm/playlists/ocean-sounds'
         },
@@ -41,7 +41,7 @@ const IntroducingSection = () => {
                     <div className="text-alpha text-base md:text-xl lg:text-2xl">Earth.fm</div>
                     <div className="max-w-3xl font-bold text-5xl md:text-7xl lg:text-[100px] lg:leading-[100px]">Play it <br className='hidden md:block' />by ear.</div>
                     <p className='text-lg md:text-2xl lg:text-3xl mt-2 md:mt-8'>
-                        At Earth.fm we consider that conscious listening is a gateway to re-learning to live a more quiet, calm, and meaningful life, one in which we feel more in harmony with the natural environment, with ourselves, and with each other. <br />That’s why we’re creating and curating world’s most diverse collection of immersive natural soundscapes: <br /> <u>so you can listen to and discover your own Inner Vision.</u>
+                        We think that conscious listening is a gateway to re-learning to live a more quiet, calm, and meaningful life, one in which we feel more in harmony with the natural environment, with ourselves, and with each other. <br /><br />That’s why we’re creating and curating world’s most diverse collection of immersive natural soundscapes: <br /> so you can listen to and <u>discover your own Inner Vision.</u>
                     </p>
                 </div>
             </div>

@@ -18,7 +18,7 @@ const DiscoverSection = () => {
                     <div className="text-base md:text-xl lg:text-2xl">Immersive sounds</div>
                     <div className="max-w-3xl font-bold text-5xl md:text-7xl lg:text-[100px] lg:leading-[100px]">Discover the power of <span className="text-alpha">natural beats.</span></div>
                     <p className='text-lg md:text-2xl lg:text-3xl'>
-                        WWhen we simply let our ears receive the music of the living nature, these miraculous, exquisite sounds can help us calm down and come back to our senses, instead of running away from them into some virtual world. <br />We can practice in our garden, at the beach, in the forest, or — as an immersive visualisation — <Link href={`https://earth.fm`} target="_blank" className="underline">listen to these recordings</Link> and let visuals naturally appear in our mind’s eye.
+                    When we simply let our ears receive the music of the living nature, these miraculous, exquisite sounds can help us calm down and come back to our senses, instead of running away from them into some virtual world. <br /><br />We can practice in our garden, at the beach, in the forest, or — as an immersive visualisation — <Link href={`https://earth.fm`} target="_blank" className="underline">listen to these recordings</Link> and let visuals naturally appear in our mind’s eye.
                     </p>
                 </div>
             </div>
